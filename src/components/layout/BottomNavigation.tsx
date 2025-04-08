@@ -3,7 +3,6 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Home, Dumbbell, Utensils, Moon, Brain, MessageSquare } from "lucide-react";
 import { cn } from "@/lib/utils";
-import UserProfileButton from "@/components/auth/UserProfileButton";
 
 const BottomNavigation = () => {
   const location = useLocation();
@@ -35,7 +34,6 @@ const BottomNavigation = () => {
             <span className="text-xs mt-1">{item.name}</span>
           </Link>
         ))}
-        <UserProfileButton />
       </div>
     </div>
   );
