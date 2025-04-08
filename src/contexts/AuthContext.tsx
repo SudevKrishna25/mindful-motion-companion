@@ -3,6 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { Session, User } from "@supabase/supabase-js";
 import { supabase } from "@/integrations/supabase/client";
 import { useToast } from "@/hooks/use-toast";
+import { Database } from "@/integrations/supabase/types";
 
 type AuthContextType = {
   session: Session | null;
@@ -57,13 +58,15 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const fetchUserProfile = async (userId: string) => {
     try {
+      // Type the query properly using the Database type
       const { data, error } = await supabase
-        .from("profiles")
-        .select("is_admin")
-        .eq("id", userId)
+        .from('profiles')
+        .select('is_admin')
+        .eq('id', userId)
         .maybeSingle();
-
+      
       if (error) throw error;
+      // Safely check if data exists and has is_admin property
       setIsAdmin(data?.is_admin || false);
     } catch (error) {
       console.error("Error fetching user profile:", error);

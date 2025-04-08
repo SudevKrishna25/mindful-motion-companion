@@ -1,7 +1,6 @@
 
 import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { User } from "@supabase/supabase-js";
 import { useQuery } from "@tanstack/react-query";
 
 import PageContainer from "@/components/layout/PageContainer";
@@ -35,9 +34,9 @@ const AdminPage = () => {
     queryKey: ["profiles"],
     queryFn: async () => {
       const { data, error } = await supabase
-        .from("profiles")
-        .select("*")
-        .order("created_at", { ascending: false });
+        .from('profiles')
+        .select('*')
+        .order('created_at', { ascending: false });
       
       if (error) throw error;
       return data as Profile[];

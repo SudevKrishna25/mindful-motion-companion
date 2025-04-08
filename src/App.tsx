@@ -34,11 +34,31 @@ const App = () => (
                 <AdminPage />
               </ProtectedRoute>
             } />
-            <Route path="/workouts" element={<WorkoutsPage />} />
-            <Route path="/nutrition" element={<NutritionPage />} />
-            <Route path="/sleep" element={<SleepPage />} />
-            <Route path="/meditation" element={<MeditationPage />} />
-            <Route path="/assistant" element={<AssistantPage />} />
+            <Route path="/workouts" element={
+              <ProtectedRoute>
+                <WorkoutsPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/nutrition" element={
+              <ProtectedRoute>
+                <NutritionPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/sleep" element={
+              <ProtectedRoute>
+                <SleepPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/meditation" element={
+              <ProtectedRoute>
+                <MeditationPage />
+              </ProtectedRoute>
+            } />
+            <Route path="/assistant" element={
+              <ProtectedRoute>
+                <AssistantPage />
+              </ProtectedRoute>
+            } />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
