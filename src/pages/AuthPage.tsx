@@ -4,11 +4,11 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { User } from "lucide-react";
 
 import PageContainer from "@/components/layout/PageContainer";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import {
   Form,
   FormControl,
@@ -76,6 +76,9 @@ const AuthPage = () => {
   return (
     <PageContainer className="max-w-md mx-auto">
       <div className="flex flex-col items-center mb-8">
+        <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mb-4">
+          <User className="h-8 w-8 text-primary" />
+        </div>
         <h1 className="text-3xl font-bold mb-2">
           {mode === "login" ? "Welcome Back" : "Create Account"}
         </h1>
