@@ -101,6 +101,7 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
   const signUp = async (email: string, password: string, fullName: string) => {
     setIsLoading(true);
     try {
+      console.log("Signing up with full name:", fullName);
       const { error } = await supabase.auth.signUp({
         email,
         password,
