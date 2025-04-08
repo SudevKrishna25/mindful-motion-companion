@@ -1,9 +1,8 @@
-
 import React, { useState } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Send, Plus, User } from "lucide-react";
+import { Send, Plus, User, Brain } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const ChatInterface = () => {
