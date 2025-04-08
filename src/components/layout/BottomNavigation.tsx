@@ -17,16 +17,18 @@ const BottomNavigation = () => {
   ];
 
   return (
-    <div className="fixed bottom-0 left-0 right-0 bg-white dark:bg-gray-900 shadow-lg z-10">
-      <div className="flex justify-around items-center p-2">
-        {navItems.map((item) => (
+    <div className="fixed bottom-0 left-0 right-0 bg-white/70 dark:bg-gray-900/70 backdrop-blur-md shadow-lg z-10 border-t border-white/20 dark:border-gray-700/30">
+      <div className="flex justify-around items-center p-2 max-w-5xl mx-auto">
+        {navItems.map((item, index) => (
           <Link
             key={item.name}
             to={item.path}
             className={cn(
               "nav-item",
-              location.pathname === item.path ? "active" : "text-gray-500 dark:text-gray-400"
+              location.pathname === item.path ? "active" : "text-gray-500 dark:text-gray-400",
+              "hover-scale"
             )}
+            style={{ animationDelay: `${index * 0.05}s` }}
           >
             {item.icon}
             <span className="text-xs mt-1">{item.name}</span>

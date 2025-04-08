@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+
+import React, { useState, useEffect, useRef } from "react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -15,6 +16,15 @@ const ChatInterface = () => {
     },
   ]);
   const [newMessage, setNewMessage] = useState("");
+  const messagesEndRef = useRef<HTMLDivElement>(null);
+
+  const scrollToBottom = () => {
+    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
 
   const handleSendMessage = () => {
     if (!newMessage.trim()) return;
@@ -64,19 +74,20 @@ const ChatInterface = () => {
   };
 
   return (
-    <div className="flex flex-col h-[calc(100vh-15rem)]">
+    <div className="flex flex-col h-[calc(100vh-15rem)] rounded-xl overflow-hidden shadow-lg bg-gradient-to-br from-white/80 to-white dark:from-gray-900/80 dark:to-gray-800 backdrop-blur-sm border border-white/20 dark:border-gray-700/30">
       <div className="flex-1 overflow-y-auto p-4 space-y-4">
-        {messages.map((message) => (
+        {messages.map((message, index) => (
           <div
             key={message.id}
             className={cn(
-              "flex",
+              "flex animate-fade-in",
               message.sender === "user" ? "justify-end" : "justify-start"
             )}
+            style={{ animationDelay: `${index * 0.1}s` }}
           >
             <div
               className={cn(
-                "max-w-[80%] rounded-2xl px-4 py-2",
+                "max-w-[80%] rounded-2xl px-4 py-2 shadow-sm transition-all duration-300 hover:shadow-md",
                 message.sender === "user"
                   ? "bg-primary text-white rounded-tr-none"
                   : "bg-gray-100 dark:bg-gray-800 rounded-tl-none"
@@ -84,7 +95,7 @@ const ChatInterface = () => {
             >
               {message.sender === "ai" && (
                 <div className="flex items-center mb-1">
-                  <div className="w-6 h-6 rounded-full bg-gradient-card flex items-center justify-center mr-2">
+                  <div className="w-6 h-6 rounded-full bg-gradient-to-br from-teal-400 to-blue-500 flex items-center justify-center mr-2 animate-pulse-slow">
                     <Brain size={14} className="text-white" />
                   </div>
                   <span className="font-medium text-sm">Wellness Assistant</span>
@@ -107,14 +118,15 @@ const ChatInterface = () => {
             </div>
           </div>
         ))}
+        <div ref={messagesEndRef} />
       </div>
 
-      <div className="p-4 border-t bg-white dark:bg-gray-900">
+      <div className="p-4 border-t bg-white/70 dark:bg-gray-900/70 backdrop-blur-sm">
         <div className="flex space-x-2">
           <Button
             variant="outline"
             size="icon"
-            className="shrink-0"
+            className="shrink-0 hover:bg-primary/10 transition-colors"
             aria-label="Add attachment"
           >
             <Plus size={18} />
@@ -124,12 +136,12 @@ const ChatInterface = () => {
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             onKeyPress={handleKeyPress}
-            className="flex-1"
+            className="flex-1 bg-white/50 dark:bg-gray-800/50 border-gray-200 dark:border-gray-700 focus:ring-2 focus:ring-primary/50 transition-all"
           />
           <Button
             type="submit"
             size="icon"
-            className="shrink-0"
+            className="shrink-0 bg-primary hover:bg-primary/90 transition-all"
             onClick={handleSendMessage}
             disabled={!newMessage.trim()}
           >
@@ -137,16 +149,32 @@ const ChatInterface = () => {
           </Button>
         </div>
         <div className="flex mt-2 space-x-2 overflow-x-auto pb-2">
-          <Button variant="outline" size="sm" className="shrink-0 text-xs">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="shrink-0 text-xs bg-white/50 dark:bg-gray-800/50 hover:bg-primary/10 hover:text-primary transition-all"
+          >
             Log a workout
           </Button>
-          <Button variant="outline" size="sm" className="shrink-0 text-xs">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="shrink-0 text-xs bg-white/50 dark:bg-gray-800/50 hover:bg-primary/10 hover:text-primary transition-all"
+          >
             Track a meal
           </Button>
-          <Button variant="outline" size="sm" className="shrink-0 text-xs">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="shrink-0 text-xs bg-white/50 dark:bg-gray-800/50 hover:bg-primary/10 hover:text-primary transition-all"
+          >
             Record sleep
           </Button>
-          <Button variant="outline" size="sm" className="shrink-0 text-xs">
+          <Button 
+            variant="outline" 
+            size="sm" 
+            className="shrink-0 text-xs bg-white/50 dark:bg-gray-800/50 hover:bg-primary/10 hover:text-primary transition-all"
+          >
             Start meditation
           </Button>
         </div>
