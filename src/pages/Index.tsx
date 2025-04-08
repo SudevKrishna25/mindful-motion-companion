@@ -13,7 +13,7 @@ const Index = () => {
   
   // Mock data
   const userData = {
-    name: "Alex",
+    name: "Sudev Krishna",
     weeklyActivity: {
       workouts: 3,
       meals: 15,
